@@ -93,10 +93,8 @@ function bubbleSort(arr, n) {
         return arr
  }
 
- let unsortedArr = [9,5,1,13,46,67,2]
- bubbleSort(unsortedArr, 7);
-
  
+  
  // Sum & average
 
  function sum(arr) {
@@ -116,3 +114,94 @@ function bubbleSort(arr, n) {
     return (recursiveSum(arr, n-1) + arr[n-1])
  }
 
+ // Algo Mathieu
+
+ function diceRoll(n) {
+    let playerTotal = 0;
+    let bankTotal = 0;
+    for (let i = 0; i < n; i++) {
+        let playerScore = Math.ceil(Math.random() * 6)
+        let bankScore = Math.ceil(Math.random() * 6)
+        if(playerScore > bankScore) {
+            playerTotal ++;
+        }
+        if(playerScore < bankScore) {
+            bankTotal ++;
+        }
+        if(playerScore == bankScore) {
+            playerTotal = playerTotal + 2
+        }
+    }
+    if (playerTotal > bankTotal) {
+        return `The player has won the game ${playerTotal} to ${bankTotal}`
+    }
+    if (bankTotal > playerTotal) {
+        return `The bank has won the game ${bankTotal} to ${playerTotal}`
+    }
+    if (bankTotal == playerTotal) {
+        return `It's a tie: ${bankTotal} to ${playerTotal}`
+    }
+}
+//console.log(diceRoll(1000000));
+
+
+
+
+  function reduce(accumulator, value) {
+    return accumulator + value;
+  }
+
+let playerTotal = 0;
+let bankTotal = 0;
+ function recursiveDiceRoll(n) {
+    if(n == 0) {
+        return 0
+    }
+    let playerScore = Math.ceil(Math.random() * 6)
+    let bankScore = Math.ceil(Math.random() * 6)
+        if(playerScore > bankScore) {
+            playerTotal = reduce(playerTotal, 1)
+        }
+        if(playerScore < bankScore) {
+            bankTotal = reduce(bankTotal, 1)
+        }
+        if(playerScore == bankScore) {
+            playerTotal = reduce(playerTotal, 2)
+        }
+    recursiveDiceRoll(n-1);
+    console.count();
+    if (playerTotal > bankTotal) {
+        return `The player has won the game ${playerTotal} to ${bankTotal}`
+    }
+    if (bankTotal > playerTotal) {
+        return `The bank has won the game ${bankTotal} to ${playerTotal}`
+    }
+    if (bankTotal == playerTotal) {
+        return `It's a tie: ${bankTotal} to ${playerTotal}`
+    }
+    
+}
+
+console.log(recursiveDiceRoll(5));
+
+
+// QUICKSORT ALGORITHM
+
+function quickSort(arr){
+    if(arr.length <= 1) {
+        return arr
+    }
+
+    const pivot = arr[arr.length - 1];
+    const leftArr = [];
+    const rightArr = [];
+
+    for (let i = 0; i < arr.length-1; i++) {
+        arr[i] < pivot ? leftArr.push(arr[i]) : rightArr.push(arr[i])
+    }
+
+    return [...quickSort(leftArr), pivot, ...quickSort(rightArr)];
+}
+
+let  testArr = [3, 24, 34, 1, 12 ,3, 4 ,99]
+console.log(quickSort(testArr));
